@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OceneController;
+use App\Models\Ocene;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $ocene = Ocene::orderBy('id', 'desc')->get()->all();
+
+    return view('welcome', compact('ocene'));
 });
+
+Route:: view('/dodaj-ocenu', 'addGrade');
+
+
+Route::post("/sacuvaj-ocenu", [OceneController::class, 'sacuvajNovuOcenu']);
